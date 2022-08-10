@@ -24,8 +24,18 @@ app.get('/getWeatherData',(req,res) => {
 });
 
 app.post('/postWeatherData', (req,res) => {
-    projectData.push(req.body);
-    //console.log(projectData);
+    const d = new Date();
+    const newEntry = {
+        date: {
+            day: d.getDate(),
+            month: d.getMonth() + 1,
+            year: d.getFullYear()
+        },
+        temp: req.body.main.temp,
+        feeling: req.body.feeling
+    };
+    
+    projectData.push(newEntry);
 });
 
 const port = 8080;

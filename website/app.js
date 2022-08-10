@@ -15,11 +15,13 @@ document.getElementById('generate').addEventListener('click',performAction);
 
 function performAction(e) {
     const zipCode = document.getElementById('zip').value;
+    const feeling = document.getElementById('feeling').value;
     getCountryData(helperURL,zipCode,apiKey)
     .then(function(data) {
         getWeatherData(baseURL,data)
         .then(function(data) {
-            postData('postWeatherData',data);
+            data.feeling = feeling;
+            postData('/postWeatherData',data);
             updateUI();
          })
      })
@@ -70,9 +72,9 @@ const updateUI = async() => {
     try {
         const allData = await res.json();
         //console.log(allData);
-        document.getElementById('temp').innerHTML = 'Actual: ' + Math.round(allData[0].main.temp) + ' degrees';
-        document.getElementById('content').innerHTML = 'Feels Like: ' + allData[0].main.feels_like + ' degrees';
-        document.getElementById('place').innerHTML = 'Place: ' + allData[0].name;
+        document.getElementById('date').innerHTML = 'Date: ' + allData[0].date.day + ' / ' + allData[0].date.month + ' / ' + allData[0].date.year
+        document.getElementById('temp').innerHTML = 'Temperature: ' + Math.round(allData[0].temp) + ' degrees';
+        document.getElementById('content').innerHTML = 'Feelings:'  + allData[0].feeling;
 
     } catch(error) {
         console.log('error', error);
