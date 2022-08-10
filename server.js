@@ -1,6 +1,6 @@
-const projectData = {
+const projectData = [
 
-};
+];
 
 const express = require('express');
 
@@ -14,15 +14,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(express.static('website'));
-app.use(cors());
+app.use(cors({
+    credentials: true
+}));
 
-app.get('/',(req,res) => {
-    res.send('Hello World');
+app.get('/getWeatherData',(req,res) => {
+    res.send(projectData);
+    console.log(projectData);
 });
 
-app.post('/app', (req,res) => {
+app.post('/postWeatherData', (req,res) => {
     projectData.push(req.body);
-    console.log(req);
+    //console.log(projectData);
 });
 
 const port = 8080;
