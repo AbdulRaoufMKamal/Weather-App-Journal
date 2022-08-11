@@ -72,9 +72,9 @@ const updateUI = async() => {
     try {
         const allData = await res.json();
         //console.log(allData);
-        document.getElementById('date').innerHTML = 'Date: ' + allData[0].date.day + ' / ' + allData[0].date.month + ' / ' + allData[0].date.year
-        document.getElementById('temp').innerHTML = 'Temperature: ' + Math.round(allData[0].temp) + ' degrees';
-        document.getElementById('content').innerHTML = 'Feelings:'  + allData[0].feeling;
+        document.getElementById('date').innerHTML = 'Date: ' + allData.date.day + ' / ' + allData.date.month + ' / ' + allData.date.year
+        document.getElementById('temp').innerHTML = 'Temperature: ' + Math.round(allData.temp) + ' degrees';
+        document.getElementById('content').innerHTML = 'Feelings:'  + allData.feeling;
 
     } catch(error) {
         console.log('error', error);

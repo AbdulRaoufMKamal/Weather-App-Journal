@@ -1,6 +1,6 @@
-const projectData = [
+const projectData = {
 
-];
+};
 
 const express = require('express');
 
@@ -25,17 +25,14 @@ app.get('/getWeatherData',(req,res) => {
 
 app.post('/postWeatherData', (req,res) => {
     const d = new Date();
-    const newEntry = {
-        date: {
-            day: d.getDate(),
-            month: d.getMonth() + 1,
-            year: d.getFullYear()
-        },
-        temp: req.body.main.temp,
-        feeling: req.body.feeling
-    };
-    
-    projectData.push(newEntry);
+    const date = {
+        day: d.getDate(),
+        month: d.getMonth() + 1,
+        year: d.getFullYear()        
+    }
+    projectData.date = date;
+    projectData.temp = req.body.main.temp;
+    projectData.feeling = req.body.feeling;
 });
 
 const port = 8080;
